@@ -1,0 +1,153 @@
+Пакет `animals`:
+- Абстрактный класс `Animal` (родительский класс для всех животных в зоопарке)
+- Класс `Mammal` (наследник класса `Animal`, представляющий млекопитающих)
+- Класс `Bird` (наследник класса `Animal`, представляющий птиц)
+- Интерфейс `Swimable` (определяющий возможность плавания)
+
+Пакет `enclosures`:
+- Абстрактный класс `Enclosure` (родительский класс для всех вольеров в зоопарке)
+- Класс `Cage` (наследник класса `Enclosure`, представляющий клетки для животных)
+- Класс `Aviary` (наследник класса `Enclosure`, представляющий вольеры для птиц)
+
+Пакет `zoo`:
+- Класс `Zoo` (главный класс, представляющий зоопарк, содержащий список животных и вольеров)
+
+Пример кода:
+
+```java
+// Пакет animals
+
+package animals;
+
+public abstract class Animal {
+    protected String name;
+    protected int age;
+    
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public abstract void makeSound();
+}
+
+package animals;
+
+public class Mammal extends Animal {
+    public Mammal(String name, int age) {
+        super(name, age);
+    }
+    
+    @Override
+    public void makeSound() {
+        System.out.println("Млекопитающее " + name + " издает звук");
+    }
+}
+
+package animals;
+
+public class Bird extends Animal implements Swimable {
+    public Bird(String name, int age) {
+        super(name, age);
+    }
+    
+    @Override
+    public void makeSound() {
+        System.out.println("Птица " + name + " издает звук");
+    }
+    
+    @Override
+    public void swim() {
+        System.out.println("Птица " + name + " плавает");
+    }
+}
+
+package animals;
+
+public interface Swimable {
+    void swim();
+}
+
+// Пакет enclosures
+
+package enclosures;
+
+import animals.Animal;
+
+public abstract class Enclosure {
+    protected String name;
+    protected int capacity;
+    protected Animal[] animals;
+    
+    public Enclosure(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+        this.animals = new Animal[capacity];
+    }
+    
+    public abstract void addAnimal(Animal animal);
+}
+
+package enclosures;
+
+import animals.Animal;
+
+public class Cage extends Enclosure {
+    public Cage(String name, int capacity) {
+        super(name, capacity);
+    }
+    
+    @Override
+    public void addAnimal(Animal animal) {
+        for (int i = 0; i < capacity; i++) {
+            if (animals[i] == null) {
+                animals[i] = animal;
+                System.out.println("Животное " + animal.name + " добавлено в клетку " + name);
+                return;
+            }
+        }
+        System.out.println("Клетка " + name + " заполнена");
+    }
+}
+
+package enclosures;
+
+import animals.Animal;
+
+public class Aviary extends Enclosure {
+    public Aviary(String name, int capacity) {
+        super(name, capacity);
+    }
+    
+    @Override
+    public void addAnimal(Animal animal) {
+        for (int i = 0; i < capacity; i++) {
+            if (animals[i] == null) {
+                animals[i] = animal;
+                System.out.println("Животное " + animal.name + " добавлено в вольер " + name);
+                return;
+            }
+        }
+        System.out.println("Вольер " + name + " заполнен");
+    }
+}
+
+// Пакет zoo
+
+package zoo;
+
+import animals.Animal;
+import enclosures.Enclosure;
+
+public class Zoo {
+    private String name;
+    private Enclosure[] enclosures;
+    private Animal[] animals;
+    
+    public Zoo(String name, int numEnclosures, int numAnimals) {
+        this.name = name;
+        this.enclosures = new Enclosure[numEnclosures];
+        this.animals = new Animal[numAnimals];
+    }
+    
+    public
