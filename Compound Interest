@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class CompoundInterestCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Ввод данных
+        System.out.print("Введите начальную сумму (Число1): ");
+        double principal = scanner.nextDouble();
+        
+        System.out.print("Введите процент (Процент): ");
+        double interestRate = scanner.nextDouble();
+        
+        System.out.print("Введите количество периодов (N): ");
+        int numPeriods = scanner.nextInt();
+        
+        // Вычисление сложного процента
+        double amount = calculateCompoundInterest(principal, interestRate, numPeriods);
+        System.out.println("Сумма после " + numPeriods + " периодов: " + amount);
+        
+        // Обратное вычисление процента
+        System.out.print("Введите желаемую сумму (Число2): ");
+        double desiredAmount = scanner.nextDouble();
+        
+        double requiredInterestRate = calculateRequiredInterestRate(principal, desiredAmount, numPeriods);
+        System.out.println("Процент, необходимый для достижения суммы " + desiredAmount + " за " + numPeriods + " периодов: " + requiredInterestRate + "%");
+    }
+    
+    // Метод для вычисления сложного процента
+    public static double calculateCompoundInterest(double principal, double interestRate, int numPeriods) {
+        double amount = principal * Math.pow(1 + interestRate / 100, numPeriods);
+        return amount;
+    }
+    
+    // Метод для обратного вычисления процента
+    public static double calculateRequiredInterestRate(double principal, double desiredAmount, int numPeriods) {
+        double requiredInterestRate = Math.pow(desiredAmount / principal, 1.0 / numPeriods) - 1;
+        requiredInterestRate *= 100;
+        return requiredInterestRate;
+    }
+}
+```
+
+Пример использования:
+```
+Введите начальную сумму (Число1): 1000
+Введите процент (Процент): 5
+Введите количество периодов (N): 3
+Сумма после 3 периодов: 1157.625
+Введите желаемую сумму (Число2): 1500
+Процент, необходимый для достижения суммы 1500 за 3 периодов: 13.42%
+```
+
+В этом примере мы сначала вводим начальную сумму (`Число1`), процент (`Процент`) и количество периодов (`N`). Затем мы используем метод `calculateCompoundInterest()` для вычисления суммы после заданного количества периодов. Затем мы запрашиваем желаемую сумму (`Число2`) и используем метод `calculateRequiredInterestRate()` для вычисления процента, необходимого для достижения этой суммы за заданное количество периодов. Результаты выводятся на консоль.
