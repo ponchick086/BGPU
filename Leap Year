@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class LeapYearChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        try {
+            System.out.print("Введите год: ");
+            int year = scanner.nextInt();
+            
+            boolean isLeapYear = checkLeapYear(year);
+            
+            if (isLeapYear) {
+                System.out.println(year + " - високосный год");
+            } else {
+                System.out.println(year + " - не високосный год");
+            }
+        } catch (Exception e) {
+            System.out.println("Ошибка: неверный ввод данных");
+        }
+    }
+    
+    public static boolean checkLeapYear(int year) {
+        if (year % 4 == 0) {
+            if (year % 100 == 0) {
+                if (year % 400 == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+```
+
+Пример использования:
+```
+Введите год: 2020
+2020 - високосный год
+```
+
+В этом примере мы используем класс `Scanner` для ввода года с клавиатуры. Затем мы вызываем метод `checkLeapYear()` для проверки, является ли год високосным. Если год високосный, выводится соответствующее сообщение. Если возникает исключительная ситуация, например, если пользователь вводит нецелое число, мы перехватываем исключение и выводим сообщение об ошибке.
