@@ -1,0 +1,40 @@
+// Родительский класс Фигура
+class Shape {
+    public void draw() {
+        System.out.println("Рисуем фигуру");
+    }
+}
+
+// Подкласс Круг, наследующий родительский класс Фигура
+class Circle extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Рисуем круг");
+    }
+}
+
+// Подкласс Квадрат, наследующий родительский класс Фигура
+class Square extends Shape {
+    @Override
+    public void draw() {
+        System.out.println("Рисуем квадрат");
+    }
+}
+
+// Главный класс
+public class Main {
+    public static void main(String[] args) {
+        // Создание объектов разных типов
+        Shape shape1 = new Shape();
+        Shape shape2 = new Circle();
+        Shape shape3 = new Square();
+        
+        // Вызов метода draw() для каждого объекта
+        shape1.draw(); // Выводит "Рисуем фигуру"
+        shape2.draw(); // Выводит "Рисуем круг"
+        shape3.draw(); // Выводит "Рисуем квадрат"
+    }
+}
+```
+
+В этом примере класс `Shape` является родительским классом, а классы `Circle` и `Square` являются его подклассами. Каждый из подклассов переопределяет метод `draw()` родительского класса. В методе `main()` создаются объекты разных типов, но ссылающиеся на родительский класс `Shape`. При вызове метода `draw()` для каждого объекта, будет вызван соответствующий метод из подкласса, что иллюстрирует полиморфизм.
