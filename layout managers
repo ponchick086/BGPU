@@ -1,0 +1,54 @@
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class LayoutDemo extends JFrame {
+    public LayoutDemo() {
+        setTitle("Layout Demo");
+        setSize(500, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Используем BorderLayout внутри JFrame
+        setLayout(new BorderLayout());
+        
+        // Создаем JPanel с FlowLayout
+        JPanel flowPanel = new JPanel();
+        flowPanel.setLayout(new FlowLayout());
+        
+        // Добавляем кнопки в JPanel
+        flowPanel.add(new JButton("Button 1"));
+        flowPanel.add(new JButton("Button 2"));
+        flowPanel.add(new JButton("Button 3"));
+        
+        // Добавляем JPanel с FlowLayout в верхнюю часть JFrame
+        add(flowPanel, BorderLayout.NORTH);
+        
+        // Создаем JPanel с BorderLayout
+        JPanel borderPanel = new JPanel();
+        borderPanel.setLayout(new BorderLayout());
+        
+        // Добавляем кнопку в центр JPanel
+        borderPanel.add(new JButton("Button 4"), BorderLayout.CENTER);
+        
+        // Добавляем JPanel с BorderLayout в центр JFrame
+        add(borderPanel, BorderLayout.CENTER);
+        
+        setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        new LayoutDemo();
+    }
+}
+
+/*
+В этом примере создается окно приложения с использованием JFrame. 
+Внутри JFrame устанавливается BorderLayout. 
+Затем создается JPanel с использованием FlowLayout и добавляются в него несколько кнопок. 
+JPanel с FlowLayout добавляется в верхнюю часть JFrame с помощью BorderLayout.NORTH. 
+Затем создается второй JPanel с использованием BorderLayout и в него добавляется одна кнопка. 
+JPanel с BorderLayout добавляется в центр JFrame с помощью BorderLayout.CENTER. 
+*/
+В результате мы получаем окно с двумя разными менеджерами компоновки, где кнопки в JPanel с FlowLayout располагаются горизонтально, а кнопка в JPanel с BorderLayout - по центру.
