@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Calculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите выражение: ");
+        String input = scanner.nextLine();
+        
+        // Разбиваем строку на отдельные токены (числа и оператор)
+        String[] tokens = input.split(" ");
+        double operand1 = Double.parseDouble(tokens[0]); // Первое число
+        double operand2 = Double.parseDouble(tokens[2]); // Второе число
+        String operator = tokens[1]; // Оператор
+        
+        double result = 0;
+        
+        // Выполняем операцию в зависимости от оператора
+        switch (operator) {
+            case "+":
+                result = operand1 + operand2;
+                break;
+            case "-":
+                result = operand1 - operand2;
+                break;
+            case "*":
+                result = operand1 * operand2;
+                break;
+            case "/":
+                result = operand1 / operand2;
+                break;
+            default:
+                System.out.println("Неверный оператор");
+                return;
+        }
+        
+        // Выводим результат вычисления на консоль
+        System.out.println("Результат: " + result);
+    }
+}
+
+
+Пример использования:
+
+Введите выражение: 2 * 6.5
+Результат: 13.0
+
+
+В этом примере мы считываем строку выражения с помощью класса `Scanner`. Затем мы разбиваем строку на отдельные токены (числа и оператор) с помощью метода `split()`. Затем мы преобразуем числа из строкового формата в числовой формат с помощью `Double.parseDouble()`. Затем мы выполняем операцию, соответствующую оператору, с помощью оператора `switch`. Наконец, мы выводим результат вычисления на консоль.
