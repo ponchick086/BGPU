@@ -68,6 +68,7 @@ public class Calculator extends JFrame implements ActionListener {
         panel.setBounds(10, 70, 270, 280);
         panel.setLayout(new GridLayout(5, 4, 10, 10));
         
+        // Добавление кнопок цифр и операций на панель
         panel.add(numberButtons[7]);
         panel.add(numberButtons[8]);
         panel.add(numberButtons[9]);
@@ -91,6 +92,7 @@ public class Calculator extends JFrame implements ActionListener {
         panel.add(clearButton);
         panel.add(backButton);
         
+        // Добавление компонентов на окно приложения
         add(display);
         add(panel);
         
@@ -99,15 +101,17 @@ public class Calculator extends JFrame implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
+        // Обработка событий для кнопок цифр
         for (int i = 0; i < 10; i++) {
             if (e.getSource() == numberButtons[i]) {
                 display.setText(display.getText() + i);
             }
         }
         
+        // Обработка события для кнопки десятичной точки
         if (e.getSource() == decimalButton) {
             display.setText(display.getText() + ".");
         }
         
-        if (e.getSource() == addButton) {
-            firstNumber = D
+        // Обработка событий для кнопок операций
+        if (e.getSource() ==
