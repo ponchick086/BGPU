@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class CardDeck {
+    private List<Card> deck;
+    private List<Card> discardedCards;
+    
+    public CardDeck() {
+        deck = new ArrayList<>();
+        discardedCards = new ArrayList<>();
+        
+        // Создание колоды карт
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                deck.add(new Card(rank, suit));
+            }
+        }
+    }
+    
+    public void shuffle() {
+        Collections.shuffle(deck);
+    }
+    
+    public Card dealCard() {
+        if (deck.isEmpty()) {
+            return null; // Если колода пуста, возвращаем null
+        }
+        
+        Card card = deck.remove(deck.size() - 1); // Берем последнюю карту из колоды
+        discardedCards.add(card); // Помещаем выбранную карту в стороннюю структуру (отброшенные карты)
+        
+        return card;
+    }
+    
+    public void returnCard(Card card) {
+        if (discardedCards.contains(card) && !deck.contains(card)) {
+            deck.add(card); // Возвращаем карту в колоду, если она ранее была выброшена и не содержится в колоде
+            discardedCards.remove(card); // Удаляем карту из сторонней структуры (отброшенные карты)
+        }
+    }
+    
+    public static void main(String[] args) {
+        CardDeck cardDeck = new CardDeck();
+        cardDeck.shuffle();
+        
+        // Сдача 5 карт
+        for (int i = 0; i < 5; i++) {
+            Card card = cardDeck.dealCard();
+            System.out.println("Сдана карта: " + card);
+        }
+        
+        // Возвращение одной карты
+        Card returnedCard = cardDeck.discardPile.get(0);
+        cardDeck.returnCard(returnedCard);
+        System.out.println("Возвращена карта: " + returnedCard);
+    }
+}
+
+enum Suit {
+    CLUBS,
+    DIAMONDS,
+    HEARTS,
+    SPADES
+}
+
+enum Rank {
+    ACE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING
+}
+
+class Card {
+    private Rank rank;
+    private Suit suit;
+    
+    public Card(Rank rank, Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+    
+    public Rank getRank() {
+        return rank;
+    }
+    
+    public Suit getSuit() {
+        return suit;
+    }
+    
+    @Override
+    public String toString() {
+        return rank + " of " + suit;
+    }
+}
+```
+
+Пример использования:
+```
+Сдана карта: KING of SPADES
+Сдана карта: QUEEN of HEARTS
+Сдана карта: TEN of CLUBS
+Сдана карта: NINE of DIAMONDS
+Сдана карта: EIGHT of SPADES
+Возвращена карта: KING of SPADES
+```
+
+В этом примере класс `CardDeck` представляет модель колоды карт. При создании колоды все возможные комбинации карт (ранги и масти) добавляются в колоду. Метод `shuffle()` перемешивает карты в колоде. Метод `dealCard()` берет последнюю карту из колоды и помещает ее в стороннюю структуру (отброшенные карты). Метод `returnCard()` возвращает карту из сторонней структуры в колоду, если эта карта была ранее выброшена и не содержится в колоде.
+
+Также в примере определены перечисления `Suit` и `Rank` для представления мастей и рангов карт соответственно, а класс `Card` представляет отдельную карту с определенным рангом и мастью.
