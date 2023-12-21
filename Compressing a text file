@@ -1,0 +1,81 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+public class FileDuplicateRemover {
+    public static void removeDuplicates(String sourceFilePath, String destinationFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(sourceFilePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(destinationFilePath))) {
+            
+            Set<String> uniqueLines = new HashSet<>();
+            String line;
+            int duplicateCount = 0;
+            
+            while ((line = reader.readLine()) != null) {
+                if (uniqueLines.contains(line)) {
+                    duplicateCount++;
+                } else {
+                    uniqueLines.add(line);
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+            
+            writer.write("Number of duplicate lines removed: " + duplicateCount);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void restoreFile(String compressedFilePath, String restoredFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(compressedFilePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(restoredFilePath))) {
+            
+            String line;
+            
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Number of duplicate lines removed:")) {
+                    continue;
+                }
+                
+                writer.write(line);
+                writer.newLine();
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main(String[] args) {
+        String sourceFilePath = "source.txt";
+        String destinationFilePath = "destination.txt";
+        String compressedFilePath = "compressed.txt";
+        String restoredFilePath = "restored.txt";
+        
+        // Удаление дублирующихся строк
+        removeDuplicates(sourceFilePath, destinationFilePath);
+        
+        // Восстановление сжатой версии в полную
+        restoreFile(compressedFilePath, restoredFilePath);
+    }
+}
+
+/*
+В этом примере класс `FileDuplicateRemover` содержит два метода: `removeDuplicates()` и `restoreFile()`. 
+
+Метод `removeDuplicates()` принимает путь к исходному файлу и путь к файлу назначения. 
+Он читает содержимое исходного файла, удаляет дублирующиеся строки и записывает уникальные строки в файл назначения. 
+Количество удаленных дублирующихся строк записывается в конце файла назначения.
+
+Метод `restoreFile()` принимает путь к сжатому файлу и путь к файлу восстановления. 
+Он читает содержимое сжатого файла и записывает его в файл восстановления, пропуская строку, содержащую информацию о количестве удаленных дублирующихся строк.
+
+В методе `main()` показано, как использовать эти методы. 
+Вы можете указать пути к исходному файлу, файлу назначения, сжатому файлу и файлу восстановления в соответствии с вашими потребностями.
+*/
