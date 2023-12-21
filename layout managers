@@ -50,5 +50,6 @@ public class LayoutDemo extends JFrame {
 JPanel с FlowLayout добавляется в верхнюю часть JFrame с помощью BorderLayout.NORTH. 
 Затем создается второй JPanel с использованием BorderLayout и в него добавляется одна кнопка. 
 JPanel с BorderLayout добавляется в центр JFrame с помощью BorderLayout.CENTER. 
-*/
+
 В результате мы получаем окно с двумя разными менеджерами компоновки, где кнопки в JPanel с FlowLayout располагаются горизонтально, а кнопка в JPanel с BorderLayout - по центру.
+*/
